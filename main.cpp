@@ -186,7 +186,7 @@ int main()
                 int senderNumber = getValidAccountNumber(myBank, "receiver");
                 int transactionAmount = getTransactionAmount();
 
-                myBank.transactionLogger();
+                myBank.transactionResult(receiverNumber, senderNumber, transactionAmount);
             }
 
             //letting user to end the system.

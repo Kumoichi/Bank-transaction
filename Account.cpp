@@ -48,3 +48,16 @@ std::string Account::getAccountType() const {
 float Account::getAccountBalance() const {
     return maccountBalance;
 }
+
+bool Account::sucOrFail(int amount) {
+    if (maccountBalance - amount >= 0) {
+        maccountBalance -= amount;
+        std::cout << "Your transaction amount is " << amount << std::endl;
+        return true;
+    } else {
+        std::cout << "--------------------------------------------------------------" << std::endl;
+        std::cout << "| You don't have enough balance for that amount of transaction|" << std::endl;
+        std::cout << "--------------------------------------------------------------" << std::endl;
+        return false;
+    }
+}

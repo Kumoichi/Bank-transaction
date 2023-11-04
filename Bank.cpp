@@ -71,3 +71,16 @@ bool Bank::accountExists(const int accountNumber) const{
     }
     return false;
 }
+
+std::string Bank::transactionResult(int receiverNumber, float transactionAmount, std::string accountType)
+{
+    for (Customer& customer : customers)
+    {
+        if (receiverNumber == customer.getAccountNumber(receiverNumber))
+        {
+            return customer.getTransactionResult(accountType, transactionAmount);
+        }
+    }
+    return "";
+}
+

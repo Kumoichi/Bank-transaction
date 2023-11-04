@@ -21,7 +21,7 @@ public:
     void displayAccountBalance() const;
     void depositAccount(float depositAmount);
     void withAccount(float withAmount);
-
+    bool sucOrFail(int amount);
     int getAccountNumber() const;
     std::string getAccountType() const;
     float getAccountBalance() const;
