@@ -60,3 +60,20 @@ bool Bank::customerExists(const std::string& customerID) const {
     }
     return false;
 }
+
+
+bool Bank::accountExists(const int accountNumber) const{
+    for(const Customer& customer : customers) {
+        if (accountNumber == customer.getAccountNumber(accountNumber))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+

@@ -8,6 +8,15 @@ std::string Customer::getCustomerId() const {
     return mcustomerId;
 }
 
+int Customer::getAccountNumber(int numberAccount) const{
+    int accNum;
+     for(const Account& account : accounts) {
+        if (numberAccount == account.getAccountNumber())
+            accNum = account.getAccountNumber();
+     }
+     return accNum;
+}
+
 void Customer::addAccount(int accountNumber, float accountBalance, std::string accountType) {
     Account account(accountNumber, accountBalance, accountType);
     accounts.push_back(account);

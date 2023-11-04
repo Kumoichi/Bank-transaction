@@ -65,7 +65,8 @@ int main()
         do{
             //letting users to choose manage thier money or making an account.
             std::cout << "Do you want to create an account?(Create) or " << std::endl << 
-            "Do you want to make a deposit, withdrawal, or exit (Deposit/Withdrawal/Exit): ";
+            "Do you want to make a deposit, withdrawal, or exit (Deposit/Withdrawal/Exitfa): " << std::endl <<
+            "or do you want to make Transaction? (Transaction)";
             std::cin >> actionChoice;
 
             //craeting account case
@@ -126,6 +127,25 @@ int main()
                 std::cout << std::endl;
                 myBank.displayDetails(customerID);
             }
+
+            else if (actionChoice == "Transaction" || actionChoice == "transaction")
+            {
+                int accountNumber;
+                while (true) {
+                    std::cout << "Enter your Account number: ";
+                    std::cin >> accountNumber; 
+
+                    //checks whehter selected customerID exists or not.
+                    bool accountExists = myBank.accountExists(accountNumber);
+
+                    if (!accountExists) {
+                        std::cerr << "Account number with " << accountNumber << " does not exist. Please enter a valid account number." << std::endl;
+                    } else {
+                        break;
+                    }
+                }     
+            }
+
             //letting user to end the system.
             else if (actionChoice == "Exit" || actionChoice == "exit") {
                 break; // Exit the inner loop and continue with the next customer

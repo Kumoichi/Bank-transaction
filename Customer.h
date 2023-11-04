@@ -18,6 +18,7 @@ public:
     Customer(std::string customerId, std::string customerName);
 
     std::string getCustomerId() const;
+    int getAccountNumber(int numberAccount) const;
     void addAccount(int accountNumber, float accountBalance, std::string accountType);
     void displayDetails() const;
     const std::vector<Account>& getAccounts() const;

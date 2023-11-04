@@ -24,6 +24,8 @@ public:
     void deposit(const std::string& customerID, const std::string& accountType, float depositAmount);
     void withdrawal(const std::string& customerID, const std::string& accountType, float withAmount);
     bool customerExists(const std::string& customerID) const;
+    bool accountExists(const int accountNumber) const;
+    int numberCheck();
 };
 
 #endif
