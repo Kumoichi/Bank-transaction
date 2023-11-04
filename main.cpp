@@ -4,9 +4,22 @@
 #include <limits>
 #include <string>
 
+//This is for getting accout number from user.
+int getAccountNumber() {
+    int accountNumber;
+    do {
+        std::cout << "Enter account number: ";
+        if (!(std::cin >> accountNumber)) {
+            std::cerr << "Invalid input. Please enter an integer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Specify '\n' as the delimiter
+        } else {
+            break; 
+        }
+    } while (true);
+    return accountNumber;
+}
 
-// This is creating customer constructor and account constructor.
-//building saving and checking as a default.
 void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     std::string name;
     std::cout << "Write your name: ";
@@ -130,10 +143,9 @@ int main()
 
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
             {
-                int accountNumber;
+                
                 while (true) {
-                    std::cout << "Enter your Account number: ";
-                    std::cin >> accountNumber; 
+                    int accountNumber = getAccountNumber(); 
 
                     //checks whehter selected customerID exists or not.
                     bool accountExists = myBank.accountExists(accountNumber);
