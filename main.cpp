@@ -5,10 +5,18 @@
 #include <string>
 
 //This is for getting accout number from user.
-int getAccountNumber() {
+int getAccountNumber(std::string sendOrReceive) {
     int accountNumber;
     do {
-        std::cout << "Enter account number: ";
+        if(sendOrReceive == "sender")
+        {
+            std::cout << "Enter your account number: ";
+        }
+        else if(sendOrReceive == "receiver")
+        {
+            std::cout << "Enter the account number that you are sending" << std::endl;
+        }
+
         if (!(std::cin >> accountNumber)) {
             std::cerr << "Invalid input. Please enter an integer." << std::endl;
             std::cin.clear();
@@ -19,6 +27,33 @@ int getAccountNumber() {
     } while (true);
     return accountNumber;
 }
+
+int getTransactionAmount()
+{
+    int amount;
+    std::cout << "Enter the amount that you want to transfer" << std::endl;
+    std::cin >> amount;
+    return amount;
+}
+
+std::string getValidCustomerID(Bank& myBank) {
+    std::string customerID;
+    while (true) {
+        std::cout << "Enter your customer ID: ";
+        std::cin >> customerID;
+
+        // Check whether the selected customerID exists or not.
+        bool customerExists = myBank.customerExists(customerID);
+
+        if (!customerExists) {
+            std::cerr << "Customer with ID " << customerID << " does not exist. Please enter a valid customer ID." << std::endl;
+        } else {
+            return customerID; // Return the valid customer ID if found
+        }
+    }
+    return customerID;
+}
+
 
 void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     std::string name;
@@ -65,6 +100,23 @@ void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     return inputValue;
 }
 
+
+int getValidAccountNumber(Bank& myBank, std::string receiveOrSend) {
+    while (true) {
+        int senderNumber = getAccountNumber(receiveOrSend);
+
+        // Check whether the selected customerID exists or not.
+        bool accountExists = myBank.accountExists(senderNumber);
+
+        if (!accountExists) {
+            std::cerr << "Account number with " << senderNumber << " does not exist. Please enter a valid account number." << std::endl;
+        } else {
+            return senderNumber;
+        }
+    }
+}
+
+
 int main()
 {
     //making the first customer and displaying
@@ -92,20 +144,7 @@ int main()
 
             //making deposit or withdrawal case
             else if (actionChoice == "Deposit" || actionChoice == "deposit" || actionChoice == "Withdrawal" || actionChoice == "withdrawal") {
-                std::string customerID;
-                while (true) {
-                    std::cout << "Enter your customer ID: ";
-                    std::cin >> customerID;
-
-                    //checkes whehter selected customerID exists or not.
-                    bool customerExists = myBank.customerExists(customerID);
-
-                    if (!customerExists) {
-                        std::cerr << "Customer with ID " << customerID << " does not exist. Please enter a valid customer ID." << std::endl;
-                    } else {
-                        break; // Exit the loop if a valid customer ID is entered
-                    }
-                }
+                std::string customerID = getValidCustomerID(myBank);
                 
                 std::string accountType;
                 do {
@@ -142,20 +181,12 @@ int main()
             }
 
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
-            {
-                
-                while (true) {
-                    int accountNumber = getAccountNumber(); 
+            {  
+                int receiverNumber = getValidAccountNumber(myBank, "sender");
+                int senderNumber = getValidAccountNumber(myBank, "receiver");
+                int transactionAmount = getTransactionAmount();
 
-                    //checks whehter selected customerID exists or not.
-                    bool accountExists = myBank.accountExists(accountNumber);
-
-                    if (!accountExists) {
-                        std::cerr << "Account number with " << accountNumber << " does not exist. Please enter a valid account number." << std::endl;
-                    } else {
-                        break;
-                    }
-                }     
+                myBank.transactionLogger();
             }
 
             //letting user to end the system.
@@ -170,3 +201,4 @@ int main()
 
     return 0;
 }
+
