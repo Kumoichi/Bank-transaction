@@ -5,6 +5,23 @@
 #include <string>
 
 //This is for getting accout number from user.
+
+std::string getValidAccountType() {
+    std::string accountType;
+    do {
+        // Selecting which one you want to make changes in saving or checking.
+        std::cout << "Choose your account type (Saving or Checking): ";
+        std::cin >> accountType;
+
+        if (accountType != "Saving" && accountType != "Checking" && accountType != "saving" && accountType != "checking") {
+                        std::cout << "Invalid account type. Please enter 'Saving' or 'Checking'." << std::endl;
+                }
+    } while (accountType != "Saving" && accountType != "Checking" && accountType != "saving" && accountType != "checking");
+
+    return accountType;
+}
+
+
 int getAccountNumber(std::string sendOrReceive) {
     int accountNumber;
     do {
@@ -14,7 +31,7 @@ int getAccountNumber(std::string sendOrReceive) {
         }
         else if(sendOrReceive == "receiver")
         {
-            std::cout << "Enter the account number that you are sending" << std::endl;
+            std::cout << "Enter the account number that you are sending";
         }
 
         if (!(std::cin >> accountNumber)) {
@@ -30,7 +47,7 @@ int getAccountNumber(std::string sendOrReceive) {
 
 int getTransactionAmount()
 {
-    int amount;
+    float amount;
     std::cout << "Enter the amount that you want to transfer" << std::endl;
     std::cin >> amount;
     return amount;
@@ -184,9 +201,9 @@ int main()
             {  
                 int receiverNumber = getValidAccountNumber(myBank, "sender");
                 int senderNumber = getValidAccountNumber(myBank, "receiver");
-                int transactionAmount = getTransactionAmount();
-
-                myBank.transactionResult(receiverNumber, senderNumber, transactionAmount);
+                float transactionAmount = getTransactionAmount();
+                std::string accountType = getValidAccountType();
+                std::string result = myBank.transactionResult(receiverNumber,transactionAmount, accountType);
             }
 
             //letting user to end the system.
