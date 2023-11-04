@@ -26,6 +26,7 @@ public:
     bool customerExists(const std::string& customerID) const;
     bool accountExists(const int accountNumber) const;
     int numberCheck();
+    void transactionLogger();
 };
 
 #endif
