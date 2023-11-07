@@ -9,6 +9,25 @@ std::string Bank::getNextCustomerID() {
     return customerID;
 }
 
+std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
+{
+    for (Customer& customer : customers)
+    {
+        if (senderNumber == customer.getAccountNumber(senderNumber))
+        {
+                std::string result = customer.getTransactionResult(senderNumber, accountType, transactionAmount);
+        }
+    }
+
+     for (Customer& customer : customers) {
+        if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
+            customer.deposit(accountType, transactionAmount);
+        }
+    }
+
+};
+
+
 int Bank::getAccountNumber(){
     int accountNumber = nextCustomerID-1;
     return accountNumber;
@@ -72,22 +91,24 @@ bool Bank::accountExists(const int accountNumber) const{
     return false;
 }
 
-std::string Bank::transactionResult(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
-{
-    for (Customer& customer : customers)
-    {
-        if (senderNumber == customer.getAccountNumber(senderNumber))
-        {
-                return customer.getTransactionResult(senderNumber, accountType, transactionAmount);
-        }
-    }
-    return "";
-}
+// std::string Bank::transactionResult(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
+// {
+//     for (Customer& customer : customers)
+//     {
+//         if (senderNumber == customer.getAccountNumber(senderNumber))
+//         {
+//                 return customer.getTransactionResult(senderNumber, accountType, transactionAmount);
+//         }
+//     }
+//     return "";
+// }
 
-void Bank::addToReceiver(int receiverNumber, const std::string& accountType, float depositAmount) {
-    for (Customer& customer : customers) {
-        if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
-            customer.deposit(accountType, depositAmount);
-        }
-    }
-}
+
+
+// void Bank::addToReceiver(int receiverNumber, const std::string& accountType, float depositAmount) {
+//     for (Customer& customer : customers) {
+//         if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
+//             customer.deposit(accountType, depositAmount);
+//         }
+//     }
+// }

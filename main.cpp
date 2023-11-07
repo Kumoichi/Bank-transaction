@@ -73,21 +73,21 @@ std::string getValidCustomerID(Bank& myBank) {
     return customerID;
 }
 
-void processTransaction(const std::string& result, Bank& myBank, int receiverNumber, const std::string& accountType, double transactionAmount) {
-    if (result == "successful") {
-        myBank.addToReceiver(receiverNumber, accountType, transactionAmount);
-    }
-}
+// void processTransaction(const std::string& result, Bank& myBank, int receiverNumber, const std::string& accountType, double transactionAmount) {
+//     if (result == "successful") {
+//         myBank.addToReceiver(receiverNumber, accountType, transactionAmount);
+//     }
+// }
 
-std::string getCurrentDateTime() {
-    time_t now = time(0);
-    struct tm* currentDateTime = localtime(&now);
+// std::string getCurrentDateTime() {
+//     time_t now = time(0);
+//     struct tm* currentDateTime = localtime(&now);
 
-    char buffer[20];
-    strftime(buffer, sizeof(buffer), "%m/%d %H:%M", currentDateTime);
+//     char buffer[20];
+//     strftime(buffer, sizeof(buffer), "%m/%d %H:%M", currentDateTime);
 
-    return buffer;
-}
+//     return buffer;
+// }
 
 
 
@@ -206,16 +206,15 @@ int main()
             }
 
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
-            {  
-                
-                
+            {    
                 int senderNumber = getValidAccountNumber(myBank, "sender");
                 int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
-                std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
-                processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
-                std::string date = getCurrentDateTime();
+                std::string resultSample = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount, accountType);
+                // std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
+                // processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
+                // std::string date = getCurrentDateTime();
             }
 
             //letting user to end the system.
