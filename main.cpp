@@ -188,11 +188,11 @@ int main()
 
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
             {  
-                int receiverNumber = getValidAccountNumber(myBank, "sender");
-                int senderNumber = getValidAccountNumber(myBank, "receiver");
+                int senderNumber = getValidAccountNumber(myBank, "sender");
+                int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
-                std::string result = myBank.transactionResult(receiverNumber,transactionAmount, accountType);
+                std::string result = myBank.transactionResult(senderNumber,transactionAmount, accountType);
                 std::cout << "Transaction was " << result;
             }
 

@@ -25,7 +25,7 @@ public:
     std::string getCustomerName() const;
     void deposit(const std::string& accountType, float depositAmount);
     void withdrawal(const std::string& accountType, float withAmount);
-    std::string getTransactionResult(int receiverNumber, std::string& accountType, float amount);
+    std::string getTransactionResult(int senderNumber, std::string& accountType, float amount);
 private:
     std::string toLowerCase(const std::string& str);
 };
