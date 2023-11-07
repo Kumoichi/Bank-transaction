@@ -87,8 +87,7 @@ void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
 
     //combining creating customer and accounts and displaying selected customer information
     void newAccount(std::string actionChoice, std::string nextCustomerID,Bank& myBank)
-    {
-            
+    {  
             createCustomerAndAddAccounts(nextCustomerID, myBank);
             myBank.displayDetails(nextCustomerID);
     }
@@ -163,17 +162,7 @@ int main()
             else if (actionChoice == "Deposit" || actionChoice == "deposit" || actionChoice == "Withdrawal" || actionChoice == "withdrawal") {
                 std::string customerID = getValidCustomerID(myBank);
                 
-                std::string accountType;
-                do {
-                    //selecting which one you want to make changes in saving or checking.
-                    std::cout << "Choose your account type (Saving or Checking): ";
-                    std::cin >> accountType;
-
-                    if (accountType != "Saving" && accountType != "Checking" && accountType != "saving" && accountType != "checking") {
-                        std::cout << "Invalid account type. Please enter 'Saving' or 'Checking'." << std::endl;
-                    }
-                } while (accountType != "Saving" && accountType != "Checking" && accountType != "saving" && accountType != "checking");
-
+                std::string accountType = getValidAccountType();
                 float amount;
 
                 while (true) {
@@ -204,6 +193,7 @@ int main()
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
                 std::string result = myBank.transactionResult(receiverNumber,transactionAmount, accountType);
+                std::cout << "Transaction was " << result;
             }
 
             //letting user to end the system.
@@ -214,8 +204,6 @@ int main()
                 std::cout << "Invalid choice. Please enter 'Deposit', 'Withdrawal', or 'Exit'." << std::endl;
             }
         } while (true); // Continue until user chooses to exit
-
-
     return 0;
 }
 

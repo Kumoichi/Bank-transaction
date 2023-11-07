@@ -78,7 +78,7 @@ std::string Bank::transactionResult(int receiverNumber, float transactionAmount,
     {
         if (receiverNumber == customer.getAccountNumber(receiverNumber))
         {
-            return customer.getTransactionResult(accountType, transactionAmount);
+                return customer.getTransactionResult(receiverNumber, accountType, transactionAmount);
         }
     }
     return "";

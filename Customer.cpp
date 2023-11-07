@@ -83,7 +83,7 @@ std::string Customer::toLowerCase(const std::string& str) {
     return lowerStr;
 }
 
-std::string Customer::getTransactionResult(std::string& accountType, float amount)
+std::string Customer::getTransactionResult(int receiverNumber, std::string& accountType, float amount)
 {
     std::string accountTypeLowerCase = toLowerCase(accountType);
     for (Account& account : accounts) {
@@ -99,3 +99,5 @@ std::string Customer::getTransactionResult(std::string& accountType, float amoun
     }
     return "Transaction failed: account not found";
 }
+
+
