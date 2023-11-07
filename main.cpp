@@ -3,6 +3,8 @@
 #include "Bank.h"
 #include <limits>
 #include <string>
+#include <ctime>
+
 
 //This is for getting accout number from user.
 
@@ -75,6 +77,16 @@ void processTransaction(const std::string& result, Bank& myBank, int receiverNum
     if (result == "successful") {
         myBank.addToReceiver(receiverNumber, accountType, transactionAmount);
     }
+}
+
+std::string getCurrentDateTime() {
+    time_t now = time(0);
+    struct tm* currentDateTime = localtime(&now);
+
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "%m/%d %H:%M", currentDateTime);
+
+    return buffer;
 }
 
 
@@ -195,13 +207,15 @@ int main()
 
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
             {  
+                
+                
                 int senderNumber = getValidAccountNumber(myBank, "sender");
                 int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
                 std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
                 processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
-
+                std::string date = getCurrentDateTime();
             }
 
             //letting user to end the system.
