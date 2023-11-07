@@ -26,7 +26,8 @@ public:
     bool customerExists(const std::string& customerID) const;
     bool accountExists(const int accountNumber) const;
     int numberCheck();
-    std::string transactionResult(int senderNumber, float transactionAmount,std::string accountType);
+    std::string transactionResult(int receiverNumber, int senderNumber, float transactionAmount,std::string accountType);
+    void addToReceiver(int receiverNumber, const std::string& accountType, float depositAmount);
 };
 
 #endif

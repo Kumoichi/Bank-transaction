@@ -71,6 +71,13 @@ std::string getValidCustomerID(Bank& myBank) {
     return customerID;
 }
 
+void processTransaction(const std::string& result, Bank& myBank, int receiverNumber, const std::string& accountType, double transactionAmount) {
+    if (result == "successful") {
+        myBank.addToReceiver(receiverNumber, accountType, transactionAmount);
+    }
+}
+
+
 
 void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     std::string name;
@@ -192,8 +199,9 @@ int main()
                 int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
-                std::string result = myBank.transactionResult(senderNumber,transactionAmount, accountType);
-                std::cout << "Transaction was " << result;
+                std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
+                processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
+
             }
 
             //letting user to end the system.

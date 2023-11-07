@@ -72,7 +72,7 @@ bool Bank::accountExists(const int accountNumber) const{
     return false;
 }
 
-std::string Bank::transactionResult(int senderNumber, float transactionAmount, std::string accountType)
+std::string Bank::transactionResult(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
 {
     for (Customer& customer : customers)
     {
@@ -84,3 +84,10 @@ std::string Bank::transactionResult(int senderNumber, float transactionAmount, s
     return "";
 }
 
+void Bank::addToReceiver(int receiverNumber, const std::string& accountType, float depositAmount) {
+    for (Customer& customer : customers) {
+        if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
+            customer.deposit(accountType, depositAmount);
+        }
+    }
+}
