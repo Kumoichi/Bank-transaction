@@ -28,3 +28,17 @@ float Transaction::getAmount() const {
 const std::string& Transaction::getResult() const {
     return result;
 }
+
+
+std::string Transaction::ToString() const {
+    std::string result;
+    result += "Transaction ID: " + std::to_string(transactionID) + "\n";
+    result += "From Account: " + std::to_string(fromAccount) + "\n";
+    result += "To Account: " + std::to_string(toAccount) + "\n";
+    result += "Timestamp: " + timestamp + "\n";
+    result += "Amount: " + std::to_string(amount) + "\n";
+    result += "Result: " + result + "\n";  
+    return result;
+}
+
+

@@ -1,7 +1,5 @@
 #include "Bank.h"
 
-
-
 Bank::Bank()
     : nextCustomerID(1) {}
 
@@ -35,8 +33,23 @@ std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float tran
     }
 
     Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
-    // transactionLogger.RecordTransaction(newTransaction);
+    TransactionLogger transactionLogger;
+    transactionLogger.RecordTransaction(&newTransaction);
 
+    int accountNumber = 0;
+    std::cout << "Enter the account number to check the transaction record" << std::endl;
+    std::cin >> accountNumber;
+    std::vector<Transaction*> matchingTransactions = transactionLogger.SearchTransactionsByAccount(accountNumber);
+
+    if (matchingTransactions.empty()) {
+        std::cout << "No transactions found for account number " << accountNumber << std::endl;
+    } else {
+        std::cout << "Transactions for account number " << accountNumber << ":" << std::endl;
+
+        for (Transaction* transaction : matchingTransactions) {
+            std::cout << transaction->ToString() << std::endl;
+        }
+    }
 };
 
 

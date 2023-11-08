@@ -5,6 +5,7 @@
 
 #include "Customer.h"
 #include "transaction.h"
+#include "transactionlogger.h"
 #include <vector>
 #include <iostream>
 #include <string>

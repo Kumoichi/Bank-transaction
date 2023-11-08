@@ -1,3 +1,5 @@
+// transaction.h
+
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
@@ -6,6 +8,7 @@
 class Transaction {
 public:
     Transaction(int transID, int senderNumber, int receiverNumber, const std::string& date, float transactionAmount, const std::string& res);
+    
     int getTransactionID() const;
     int getFromAccount() const;
     int getToAccount() const;
@@ -13,6 +16,8 @@ public:
     float getAmount() const;
     const std::string& getResult() const;
 
+    std::string ToString() const;
+    
 private:
     int transactionID;
     int fromAccount;
