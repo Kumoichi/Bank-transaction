@@ -1,7 +1,15 @@
 #include "Bank.h"
 
+
+
 Bank::Bank()
     : nextCustomerID(1) {}
+
+
+int Bank::GetNextTransactionID() const {
+    static int transactionCounter = 1;
+    return transactionCounter++;
+}
 
 std::string Bank::getNextCustomerID() {
     std::string customerID = "C" + std::to_string(nextCustomerID);
@@ -9,21 +17,25 @@ std::string Bank::getNextCustomerID() {
     return customerID;
 }
 
-std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
+std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType, std::string date)
 {
+    std::string result;
     for (Customer& customer : customers)
     {
         if (senderNumber == customer.getAccountNumber(senderNumber))
         {
-                std::string result = customer.getTransactionResult(senderNumber, accountType, transactionAmount);
+                result = customer.getTransactionResult(senderNumber, accountType, transactionAmount);
         }
     }
 
-     for (Customer& customer : customers) {
+    for (Customer& customer : customers) {
         if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
             customer.deposit(accountType, transactionAmount);
         }
     }
+
+    Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
+    // transactionLogger.RecordTransaction(newTransaction);
 
 };
 
@@ -90,6 +102,8 @@ bool Bank::accountExists(const int accountNumber) const{
     }
     return false;
 }
+
+
 
 // std::string Bank::transactionResult(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
 // {

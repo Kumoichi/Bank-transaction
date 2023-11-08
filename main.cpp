@@ -79,15 +79,15 @@ std::string getValidCustomerID(Bank& myBank) {
 //     }
 // }
 
-// std::string getCurrentDateTime() {
-//     time_t now = time(0);
-//     struct tm* currentDateTime = localtime(&now);
+std::string getCurrentDateTime() {
+    time_t now = time(0);
+    struct tm* currentDateTime = localtime(&now);
 
-//     char buffer[20];
-//     strftime(buffer, sizeof(buffer), "%m/%d %H:%M", currentDateTime);
+    char buffer[20];
+    strftime(buffer, sizeof(buffer), "%m/%d %H:%M", currentDateTime);
 
-//     return buffer;
-// }
+    return buffer;
+}
 
 
 
@@ -211,10 +211,11 @@ int main()
                 int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
-                std::string resultSample = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount, accountType);
+                std::string date = getCurrentDateTime();
+                std::string resultSample = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount,accountType, date);
                 // std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
                 // processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
-                // std::string date = getCurrentDateTime();
+
             }
 
             //letting user to end the system.
