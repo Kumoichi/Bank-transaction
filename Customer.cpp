@@ -91,7 +91,7 @@ std::string Customer::getTransactionResult(int senderNumber, std::string& accoun
 
         if (accountTypeLowerCase == accountTypeLowerCaseAccount) {
             if (account.sucOrFail(amount)) {
-                return "successful";
+                return "Successful";
             } else {
                 return "Fail";
             }

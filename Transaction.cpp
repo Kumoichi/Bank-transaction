@@ -32,6 +32,7 @@ const std::string& Transaction::getResult() const {
 
 std::string Transaction::ToString() const {
     std::string resultString;
+    resultString += "-----------------------------------\n";
     resultString += "Transaction ID: " + std::to_string(transactionID) + "\n";
     resultString += "From Account: " + std::to_string(fromAccount) + "\n";
     resultString += "To Account: " + std::to_string(toAccount) + "\n";
@@ -42,5 +43,6 @@ std::string Transaction::ToString() const {
     amountStream << std::fixed << std::setprecision(2) << amount;
     
     resultString += "Amount: " + amountStream.str() + "\n";
+    resultString += "-----------------------------------\n";
     return resultString;
 }

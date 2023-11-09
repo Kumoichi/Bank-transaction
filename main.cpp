@@ -90,6 +90,14 @@ std::string getCurrentDateTime() {
 }
 
 
+void searchTransaction(Bank& myBank)
+{
+    int accountNumberToSearch;
+    std::cout << "Enter the account number to check the transaction record" << std::endl;
+    std::cin >> accountNumberToSearch;
+    myBank.searchTransaction(accountNumberToSearch);
+}
+
 
 void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     std::string name;
@@ -164,9 +172,12 @@ int main()
         
         do{
             //letting users to choose manage thier money or making an account.
+            std::cout << std::endl;
             std::cout << "Do you want to create an account?(Create) or " << std::endl << 
-            "Do you want to make a deposit, withdrawal, or exit (Deposit/Withdrawal/Exitfa): " << std::endl <<
-            "or do you want to make Transaction? (Transaction)";
+            "Do you want to make a deposit, withdrawal, or exit (Deposit/Withdrawal/Exitfa) " << std::endl <<
+            "or do you want to make Transaction? (Transaction):" << std::endl << 
+            "or do you want to search Transaction (Search):";
+
             std::cin >> actionChoice;
 
             //craeting account case
@@ -214,14 +225,11 @@ int main()
                 std::string date = getCurrentDateTime();
                 std::string result = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount,accountType, date);
                 
-                // myBank.storeTransaction(senderNumber, receiverNumber, date, transactionAmount,result);
-                int accountNumberToSearch;
-                std::cout << "Enter the account number to check the transaction record" << std::endl;
-                std::cin >> accountNumberToSearch;
-                myBank.searchTransaction(accountNumberToSearch);
-                // std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
-                // processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
+            }
 
+            else if (actionChoice == "Search" || actionChoice == "search")
+            {
+                searchTransaction(myBank);
             }
 
             //letting user to end the system.

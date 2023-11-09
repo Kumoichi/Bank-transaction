@@ -8,7 +8,6 @@
 class Transaction {
 public:
     Transaction(int transID, int senderNumber, int receiverNumber, const std::string& date, float transactionAmount, const std::string& res);
-
     int getTransactionID() const;
     int getFromAccount() const;
     int getToAccount() const;

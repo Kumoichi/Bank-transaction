@@ -32,14 +32,16 @@ std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float tran
         }
     }
 
-    Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
+    if(result == "Successful")
+    {
+        Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
+    // Create a shared pointer from the raw pointer
+    std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);
 
-// Create a shared pointer from the raw pointer
-std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);
-
-// Pass the shared pointer to RecordTransaction
-transactionLogger.RecordTransaction(sharedTransaction);
-
+    // Pass the shared pointer to RecordTransaction
+    transactionLogger.RecordTransaction(sharedTransaction);
+    }
+    
     return result; 
 };
 
