@@ -1,9 +1,10 @@
 #include "transaction.h"
+#include <iostream>
+#include <iomanip>
 
 Transaction::Transaction(int transID, int senderNumber, int receiverNumber, const std::string& date, float transactionAmount, const std::string& res)
     : transactionID(transID), fromAccount(senderNumber), toAccount(receiverNumber), timestamp(date), amount(transactionAmount), result(res) {
 }
-
 
 int Transaction::getTransactionID() const {
     return transactionID;
@@ -29,16 +30,17 @@ const std::string& Transaction::getResult() const {
     return result;
 }
 
-
 std::string Transaction::ToString() const {
-    std::string result;
-    result += "Transaction ID: " + std::to_string(transactionID) + "\n";
-    result += "From Account: " + std::to_string(fromAccount) + "\n";
-    result += "To Account: " + std::to_string(toAccount) + "\n";
-    result += "Timestamp: " + timestamp + "\n";
-    result += "Amount: " + std::to_string(amount) + "\n";
-    result += "Result: " + result + "\n";  
-    return result;
+    std::string resultString;
+    resultString += "Transaction ID: " + std::to_string(transactionID) + "\n";
+    resultString += "From Account: " + std::to_string(fromAccount) + "\n";
+    resultString += "To Account: " + std::to_string(toAccount) + "\n";
+    resultString += "Timestamp: " + timestamp + "\n";
+    
+    // Use a temporary stringstream for formatting the amount
+    std::stringstream amountStream;
+    amountStream << std::fixed << std::setprecision(2) << amount;
+    
+    resultString += "Amount: " + amountStream.str() + "\n";
+    return resultString;
 }
-
-

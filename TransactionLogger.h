@@ -14,7 +14,7 @@ public:
     void RecordTransaction(std::shared_ptr<Transaction> transaction);
     std::vector<std::shared_ptr<Transaction>> SearchTransactionsByAccount(int accountNumber) const;
 private:
-    std::vector<std::shared_ptr<Transaction>> transactionHistory;
+    std::vector<std::shared_ptr<Transaction>> transactionStorage;
 };
 
 #endif

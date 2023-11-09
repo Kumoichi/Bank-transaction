@@ -5,22 +5,22 @@ TransactionLogger::TransactionLogger() {
 }
 
 void TransactionLogger::RecordTransaction(std::shared_ptr<Transaction> transaction) {
-    transactionHistory.push_back(transaction);
+    transactionStorage.push_back(transaction);
 
-    if (transactionHistory.size() > 100) {
-        transactionHistory.erase(transactionHistory.begin());
+    if (transactionStorage.size() > 100) {
+        transactionStorage.erase(transactionStorage.begin());
     }
 }
 
 
 std::vector<std::shared_ptr<Transaction>> TransactionLogger::SearchTransactionsByAccount(int accountNumber) const {
-    std::vector<std::shared_ptr<Transaction>> matchingTransactions;
+    std::vector<std::shared_ptr<Transaction>> enteredTransactions;
 
-    for (const auto& transaction : transactionHistory) {
+    for (const auto& transaction : transactionStorage) {
         if (transaction->getFromAccount() == accountNumber || transaction->getToAccount() == accountNumber) {
-            matchingTransactions.push_back(transaction);
+            enteredTransactions.push_back(transaction);
         }
     }
 
-    return matchingTransactions;
+    return enteredTransactions;
 }

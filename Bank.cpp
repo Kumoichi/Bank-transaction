@@ -44,15 +44,15 @@ transactionLogger.RecordTransaction(sharedTransaction);
 };
 
 void Bank::searchTransaction(int accountNumber) const {
-    std::vector<std::shared_ptr<Transaction>> matchingTransactions = transactionLogger.SearchTransactionsByAccount(accountNumber);
+    std::vector<std::shared_ptr<Transaction>> enteredTransactions = transactionLogger.SearchTransactionsByAccount(accountNumber);
 
     // Display results
-    if (matchingTransactions.empty()) {
+    if (enteredTransactions.empty()) {
         std::cout << "No transactions found for account number " << accountNumber << std::endl;
     } else {
         std::cout << "Transactions for account number " << accountNumber << ":" << std::endl;
 
-        for (const auto& transaction : matchingTransactions) {
+        for (const auto& transaction : enteredTransactions) {
             std::cout << transaction->ToString() << std::endl;
         }
     }
