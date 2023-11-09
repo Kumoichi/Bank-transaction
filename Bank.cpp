@@ -33,24 +33,30 @@ std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float tran
     }
 
     Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
-    TransactionLogger transactionLogger;
-    transactionLogger.RecordTransaction(&newTransaction);
 
-    int accountNumber = 0;
-    std::cout << "Enter the account number to check the transaction record" << std::endl;
-    std::cin >> accountNumber;
-    std::vector<Transaction*> matchingTransactions = transactionLogger.SearchTransactionsByAccount(accountNumber);
+// Create a shared pointer from the raw pointer
+std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);
 
+// Pass the shared pointer to RecordTransaction
+transactionLogger.RecordTransaction(sharedTransaction);
+
+    return result; 
+};
+
+void Bank::searchTransaction(int accountNumber) const {
+    std::vector<std::shared_ptr<Transaction>> matchingTransactions = transactionLogger.SearchTransactionsByAccount(accountNumber);
+
+    // Display results
     if (matchingTransactions.empty()) {
         std::cout << "No transactions found for account number " << accountNumber << std::endl;
     } else {
         std::cout << "Transactions for account number " << accountNumber << ":" << std::endl;
 
-        for (Transaction* transaction : matchingTransactions) {
+        for (const auto& transaction : matchingTransactions) {
             std::cout << transaction->ToString() << std::endl;
         }
     }
-};
+}
 
 
 int Bank::getAccountNumber(){

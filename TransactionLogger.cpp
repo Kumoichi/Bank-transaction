@@ -1,24 +1,22 @@
-// transactionlogger.cpp
-
 #include "transactionlogger.h"
 
 TransactionLogger::TransactionLogger() {
     // Constructor, you can initialize any necessary data members here
 }
 
-void TransactionLogger::RecordTransaction(Transaction* transaction) {
+void TransactionLogger::RecordTransaction(std::shared_ptr<Transaction> transaction) {
     transactionHistory.push_back(transaction);
 
     if (transactionHistory.size() > 100) {
-        delete transactionHistory[0];
         transactionHistory.erase(transactionHistory.begin());
     }
 }
 
-std::vector<Transaction*> TransactionLogger::SearchTransactionsByAccount(int accountNumber) const {
-    std::vector<Transaction*> matchingTransactions;
 
-    for (auto transaction : transactionHistory) {
+std::vector<std::shared_ptr<Transaction>> TransactionLogger::SearchTransactionsByAccount(int accountNumber) const {
+    std::vector<std::shared_ptr<Transaction>> matchingTransactions;
+
+    for (const auto& transaction : transactionHistory) {
         if (transaction->getFromAccount() == accountNumber || transaction->getToAccount() == accountNumber) {
             matchingTransactions.push_back(transaction);
         }

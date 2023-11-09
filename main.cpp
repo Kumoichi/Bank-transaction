@@ -212,7 +212,13 @@ int main()
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
                 std::string date = getCurrentDateTime();
-                std::string resultSample = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount,accountType, date);
+                std::string result = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount,accountType, date);
+                
+                // myBank.storeTransaction(senderNumber, receiverNumber, date, transactionAmount,result);
+                int accountNumberToSearch;
+                std::cout << "Enter the account number to check the transaction record" << std::endl;
+                std::cin >> accountNumberToSearch;
+                myBank.searchTransaction(accountNumberToSearch);
                 // std::string result = myBank.transactionResult(receiverNumber, senderNumber,transactionAmount, accountType);
                 // processTransaction(result, myBank, receiverNumber, accountType, transactionAmount);
 

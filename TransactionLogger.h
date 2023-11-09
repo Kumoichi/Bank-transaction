@@ -4,18 +4,17 @@
 #define TRANSACTIONLOGGER_H
 
 #include "transaction.h"  // Include the header for the Transaction class
-
+#include <memory>
 #include <vector>
 
 class TransactionLogger {
 public:
     TransactionLogger();
 
-    void RecordTransaction(Transaction* transaction);
-    std::vector<Transaction*> SearchTransactionsByAccount(int accountNumber) const;
-
+    void RecordTransaction(std::shared_ptr<Transaction> transaction);
+    std::vector<std::shared_ptr<Transaction>> SearchTransactionsByAccount(int accountNumber) const;
 private:
-    std::vector<Transaction*> transactionHistory;
+    std::vector<std::shared_ptr<Transaction>> transactionHistory;
 };
 
 #endif

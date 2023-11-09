@@ -14,12 +14,15 @@ class Bank {
 private:
     std::vector<Customer> customers;
     int nextCustomerID;
+    TransactionLogger transactionLogger;
 
 public:
     Bank();
 
     std::string getNextCustomerID();
     std::string TransferMoney(int receivernumber, int senderNumber, float transactionAmount, std::string accountType, std::string date);
+    void storeTransaction(int senderNumber, int receiverNumber, std::string date, float transactionAmount, std::string result);
+    void searchTransaction(int accountNumber) const;
     int getAccountNumber();
     void createCustomer(const std::string& customerName, const std::string& customerId);
     void addAccount(const std::string& customerID, int accountNumber, float accountBalance, const std::string& accountType);
