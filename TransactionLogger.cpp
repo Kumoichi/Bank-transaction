@@ -24,3 +24,5 @@ std::vector<std::shared_ptr<Transaction>> TransactionLogger::SearchTransactionsB
 
     return enteredTransactions;
 }
+
+

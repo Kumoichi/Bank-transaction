@@ -33,7 +33,7 @@ int getAccountNumber(std::string sendOrReceive) {
         }
         else if(sendOrReceive == "receiver")
         {
-            std::cout << "Enter the account number that you are sending";
+            std::cout << "Enter the account number that you are sending :";
         }
 
         if (!(std::cin >> accountNumber)) {
@@ -50,7 +50,7 @@ int getAccountNumber(std::string sendOrReceive) {
 int getTransactionAmount()
 {
     float amount;
-    std::cout << "Enter the amount that you want to transfer" << std::endl;
+    std::cout << "Enter the amount that you want to transfer: ";
     std::cin >> amount;
     return amount;
 }
@@ -97,6 +97,7 @@ void searchTransaction(Bank& myBank)
     std::cin >> accountNumberToSearch;
     myBank.searchTransaction(accountNumberToSearch);
 }
+
 
 
 void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
@@ -174,9 +175,11 @@ int main()
             //letting users to choose manage thier money or making an account.
             std::cout << std::endl;
             std::cout << "Do you want to create an account?(Create) or " << std::endl << 
-            "Do you want to make a deposit, withdrawal, or exit (Deposit/Withdrawal/Exitfa) " << std::endl <<
-            "or do you want to make Transaction? (Transaction):" << std::endl << 
-            "or do you want to search Transaction (Search):";
+            "Do you want to make a deposit, withdrawal (Deposit/Withdrawal) or" << std::endl <<
+            "Do you want to make Transaction? (Transaction) or" << std::endl << 
+            "Do you want to search Transaction (Search) or" << std::endl <<
+            "Exit?  (Exit)"<< std::endl <<
+            "Enter One of these options(Create),(Deposit/Withdrawal),(Transaction),(Search),(Exit)" << std::endl;
 
             std::cin >> actionChoice;
 

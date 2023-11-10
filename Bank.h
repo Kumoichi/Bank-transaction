@@ -9,6 +9,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <algorithm> // for std::transform
+#include <cctype> 
 
 class Bank {
 private:

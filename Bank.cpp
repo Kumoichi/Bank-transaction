@@ -35,13 +35,13 @@ std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float tran
     if(result == "Successful")
     {
         Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
-    // Create a shared pointer from the raw pointer
-    std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);
+        // Create a shared pointer from the raw pointer
+        std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);
 
-    // Pass the shared pointer to RecordTransaction
-    transactionLogger.RecordTransaction(sharedTransaction);
+        // Pass the shared pointer to RecordTransaction
+        transactionLogger.RecordTransaction(sharedTransaction);
     }
-    
+
     return result; 
 };
 
@@ -59,7 +59,6 @@ void Bank::searchTransaction(int accountNumber) const {
         }
     }
 }
-
 
 int Bank::getAccountNumber(){
     int accountNumber = nextCustomerID-1;
@@ -125,25 +124,3 @@ bool Bank::accountExists(const int accountNumber) const{
 }
 
 
-
-// std::string Bank::transactionResult(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType)
-// {
-//     for (Customer& customer : customers)
-//     {
-//         if (senderNumber == customer.getAccountNumber(senderNumber))
-//         {
-//                 return customer.getTransactionResult(senderNumber, accountType, transactionAmount);
-//         }
-//     }
-//     return "";
-// }
-
-
-
-// void Bank::addToReceiver(int receiverNumber, const std::string& accountType, float depositAmount) {
-//     for (Customer& customer : customers) {
-//         if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
-//             customer.deposit(accountType, depositAmount);
-//         }
-//     }
-// }
