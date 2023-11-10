@@ -8,6 +8,7 @@ std::string Customer::getCustomerId() const {
     return mcustomerId;
 }
 
+// checking which account to get
 int Customer::getAccountNumber(int numberAccount) const{
     int accNum;
      for(const Account& account : accounts) {
@@ -17,10 +18,12 @@ int Customer::getAccountNumber(int numberAccount) const{
      return accNum;
 }
 
+// adding account to the accounts arraylist
 void Customer::addAccount(int accountNumber, float accountBalance, std::string accountType) {
     Account account(accountNumber, accountBalance, accountType);
     accounts.push_back(account);
 }
+
 
 void Customer::displayDetails() const {
     std::cout << std::endl;
@@ -83,6 +86,7 @@ std::string Customer::toLowerCase(const std::string& str) {
     return lowerStr;
 }
 
+// calling sucOrFail function to decide whether user have sufficient funds.
 std::string Customer::getTransactionResult(int senderNumber, std::string& accountType, float amount)
 {
     std::string accountTypeLowerCase = toLowerCase(accountType);

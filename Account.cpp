@@ -1,11 +1,9 @@
 #include "Account.h"
 #include <iostream>
 
-// Default constructor
 Account::Account()
     : maccountNumber(0), maccountBalance(0.0f), maccountType("") {}
 
-// Parameterized constructor
 Account::Account(int accountNumber, float accountBalance, const std::string& accountType)
     : maccountNumber(accountNumber), maccountBalance(accountBalance), maccountType(accountType) {}
 
@@ -26,6 +24,7 @@ void Account::depositAccount(float depositAmount) {
     std::cout << "Your deposit amount is " << depositAmount << std::endl;
 }
 
+// shows not enought amount message if it doesn't have sufficient funds
 void Account::withAccount(float withAmount) {
     if (maccountBalance - withAmount >= 0) {
         maccountBalance -= withAmount;
@@ -48,6 +47,9 @@ std::string Account::getAccountType() const {
 float Account::getAccountBalance() const {
     return maccountBalance;
 }
+
+
+// shows not enought amount message if it doesn't have sufficient funds
 
 bool Account::sucOrFail(int amount) {
     if (maccountBalance - amount >= 0) {

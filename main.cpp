@@ -23,7 +23,7 @@ std::string getValidAccountType() {
     return accountType;
 }
 
-
+//getting accountNumber
 int getAccountNumber(std::string sendOrReceive) {
     int accountNumber;
     do {
@@ -47,6 +47,7 @@ int getAccountNumber(std::string sendOrReceive) {
     return accountNumber;
 }
 
+//getting transactionAmount
 int getTransactionAmount()
 {
     float amount;
@@ -55,6 +56,7 @@ int getTransactionAmount()
     return amount;
 }
 
+//Checking whether that customer exists or not
 std::string getValidCustomerID(Bank& myBank) {
     std::string customerID;
     while (true) {
@@ -73,12 +75,7 @@ std::string getValidCustomerID(Bank& myBank) {
     return customerID;
 }
 
-// void processTransaction(const std::string& result, Bank& myBank, int receiverNumber, const std::string& accountType, double transactionAmount) {
-//     if (result == "successful") {
-//         myBank.addToReceiver(receiverNumber, accountType, transactionAmount);
-//     }
-// }
-
+//getting real time
 std::string getCurrentDateTime() {
     time_t now = time(0);
     struct tm* currentDateTime = localtime(&now);
@@ -89,7 +86,7 @@ std::string getCurrentDateTime() {
     return buffer;
 }
 
-
+// calling searchTransaction function
 void searchTransaction(Bank& myBank)
 {
     int accountNumberToSearch;
@@ -144,7 +141,7 @@ void createCustomerAndAddAccounts(std::string nextCustomerID,Bank& myBank) {
     return inputValue;
 }
 
-
+// checking whether that accout number is valid or not
 int getValidAccountNumber(Bank& myBank, std::string receiveOrSend) {
     while (true) {
         int senderNumber = getAccountNumber(receiveOrSend);
@@ -219,17 +216,21 @@ int main()
                 myBank.displayDetails(customerID);
             }
 
+            // when user input is transaction
             else if (actionChoice == "Transaction" || actionChoice == "transaction")
             {    
+                // getting senderNumber, receiverNumber, transactionAmount, accountType, Date, and transaction result
                 int senderNumber = getValidAccountNumber(myBank, "sender");
                 int receiverNumber = getValidAccountNumber(myBank, "receiver");
                 float transactionAmount = getTransactionAmount();
                 std::string accountType = getValidAccountType();
                 std::string date = getCurrentDateTime();
+
+                // sending them into transferMoney function
                 std::string result = myBank.TransferMoney(receiverNumber, senderNumber,transactionAmount,accountType, date);
                 
             }
-
+            // for searching a specific transaction
             else if (actionChoice == "Search" || actionChoice == "search")
             {
                 searchTransaction(myBank);

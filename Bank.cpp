@@ -3,20 +3,23 @@
 Bank::Bank()
     : nextCustomerID(1) {}
 
-
+// increment everytime
 int Bank::GetNextTransactionID() const {
     static int transactionCounter = 1;
     return transactionCounter++;
 }
 
+// increment everytime attached with C
 std::string Bank::getNextCustomerID() {
     std::string customerID = "C" + std::to_string(nextCustomerID);
     nextCustomerID++;
     return customerID;
 }
 
+// 
 std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float transactionAmount, std::string accountType, std::string date)
 {
+    // this part is checking whether user has sufficient amount or not.
     std::string result;
     for (Customer& customer : customers)
     {
@@ -26,14 +29,16 @@ std::string Bank::TransferMoney(int receiverNumber, int senderNumber, float tran
         }
     }
 
-    for (Customer& customer : customers) {
-        if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
-            customer.deposit(accountType, transactionAmount);
-        }
-    }
-
+    
     if(result == "Successful")
     {
+        // if result is successfull then sending money into toAccount user.
+        for (Customer& customer : customers) {
+            if (receiverNumber == customer.getAccountNumber(receiverNumber)) {
+                customer.deposit(accountType, transactionAmount);
+            }
+        }
+
         Transaction newTransaction(GetNextTransactionID(), senderNumber, receiverNumber, date, transactionAmount, result);
         // Create a shared pointer from the raw pointer
         std::shared_ptr<Transaction> sharedTransaction = std::make_shared<Transaction>(newTransaction);

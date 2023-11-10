@@ -1,9 +1,9 @@
 #include "transactionlogger.h"
 
 TransactionLogger::TransactionLogger() {
-    // Constructor, you can initialize any necessary data members here
 }
 
+// storing transaction that is passed from bank.cpp
 void TransactionLogger::RecordTransaction(std::shared_ptr<Transaction> transaction) {
     transactionStorage.push_back(transaction);
 
@@ -12,7 +12,7 @@ void TransactionLogger::RecordTransaction(std::shared_ptr<Transaction> transacti
     }
 }
 
-
+// seaching transaction from transactionStorage
 std::vector<std::shared_ptr<Transaction>> TransactionLogger::SearchTransactionsByAccount(int accountNumber) const {
     std::vector<std::shared_ptr<Transaction>> enteredTransactions;
 

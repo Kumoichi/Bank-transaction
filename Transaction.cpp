@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
+// transaction class stores all information as objects that users have entered
 Transaction::Transaction(int transID, int senderNumber, int receiverNumber, const std::string& date, float transactionAmount, const std::string& res)
     : transactionID(transID), fromAccount(senderNumber), toAccount(receiverNumber), timestamp(date), amount(transactionAmount), result(res) {
 }
@@ -30,6 +31,7 @@ const std::string& Transaction::getResult() const {
     return result;
 }
 
+// for displaying searched account transaction result.
 std::string Transaction::ToString() const {
     std::string resultString;
     resultString += "-----------------------------------\n";
